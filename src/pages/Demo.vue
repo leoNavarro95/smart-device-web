@@ -37,5 +37,7 @@ const sendGPIO = () => {
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click=sendGPIO>{{pin}} status is: {{ status }} </button>
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="count++" >count is: {{ count }}</button>
   </div>
+
+  
 </template>
 
