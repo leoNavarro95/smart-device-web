@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
+
 import useGpio from '../stores/gpio.js'
+import Card from '../components/Card.vue'
 
 import { getCurrentInstance } from "vue"
 const { proxy } = getCurrentInstance()
@@ -36,6 +38,12 @@ const sendGPIO = () => {
   <div class="p-5">
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click=sendGPIO>{{pin}} status is: {{ status }} </button>
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="count++" >count is: {{ count }}</button>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 justify-center items-center">
+    <card title="GPIO State"></card>
+    <card title="PWM State"></card>
+    <card title="Analog Reading"></card>
   </div>
 
   
