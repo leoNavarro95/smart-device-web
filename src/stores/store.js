@@ -1,15 +1,9 @@
-import { defineStore } from 'pinia'
+import { createPinia } from 'pinia';
 
-const useStore = defineStore('storeId', {
-  // arrow function recommended for full type inference
-  state: () => {
-    return {
-      // all these properties will have their type inferred automatically
-      counter: 0,
-      name: 'Leo',
-      isAdmin: true,
-    }
-  },
-})
+const store = createPinia();
 
-export default useStore
+export function setupStore(app) {
+  app.use(store);
+}
+
+export { store };
