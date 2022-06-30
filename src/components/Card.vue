@@ -1,7 +1,7 @@
 <script setup>
 
 defineProps({
-  title: String
+  header: String
 })
 
 </script>
@@ -15,8 +15,27 @@ defineProps({
           text-2xl font-bold text-white
           mb-2 px-2 
           ">
-          {{title}}
+          {{header}}
     </h2>
-    <p class="text-gray-700">This is my cool new card!</p>
+
+    <!-- BODY: Default slot -->
+    <div class="p-1 md:p-5 text-gray-700 ">
+      <slot></slot>
+    </div>
+    <!-- /BODY -->
+
+    <!-- FOOTER: Footer slot -->
+    <div class="
+        bg-indigo-200
+          rounded-b-lg
+        text-white
+          px-2
+        ">
+      <slot name="footer">
+        
+      </slot>
+    </div>
+    <!-- /FOOTER -->
+
   </div>
 </template>
