@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-
-import useGpio from '../stores/gpio.js'
-import Card from '../components/Card.vue'
-
 import { getCurrentInstance } from "vue"
+
+import Card from '../components/Card.vue'
+import DigitalStatus from '../components/DigitalStatus.vue'
+
+import useGpioStore from '../stores/gpio.js'
+
 const { proxy } = getCurrentInstance()
 
 defineProps({
@@ -14,18 +16,18 @@ defineProps({
 
 const count = ref(0)
 
-const gpio = useGpio()
+const gpio = useGpioStore()
 
-const {pin, status} = storeToRefs(gpio)
+const {digitalOutput, digitalInput} = storeToRefs(gpio)
 
-const sendGPIO = () => {
-   gpio.status = !gpio.status 
-   console.log(pin.value + ': ' + status.value);
+const sendGPIO = ( outPin ) => {
+   outPin.status = !outPin.status 
+   console.log(outPin.pin.value + ': ' + outPin.status.value);
 
       let data = {
         command: "setGPIO",
-        id: pin.value,
-        status: status.value
+        id: outPin.pin.value,
+        status: outPin.status.value
       }
 
       let json = JSON.stringify(data)
@@ -35,15 +37,31 @@ const sendGPIO = () => {
 
 <template>
   <h1>{{ msg }}</h1>
-  <div class="p-5">
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click=sendGPIO>{{pin}} status is: {{ status }} </button>
+  <div class="p-5">    
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="count++" >count is: {{ count }}</button>
   </div>
 
   <div class="grid grid-cols-2 md:grid-cols-3 justify-center items-center">
-    <card title="GPIO State"></card>
-    <card title="PWM State"></card>
-    <card title="Analog Reading"></card>
+    
+    <card header="Outputs   +">
+      
+      <div v-for="output in digitalOutput" >
+        <digital-status @change-status="sendGPIO(output)" type="Output" :pin="output.pin" :status="output.status"></digital-status>
+      </div>
+
+    </card>
+    
+    <card header="PWM State">
+      <p>Multiples slots</p>
+      <button class="bg-pink-500 hover:bg-pink-700 active:bg-pink-300 text-white py-2 px-4 rounded">Press me</button>
+    </card>
+    
+    <card header="Analog Reading">
+      Body here
+      <template #footer>
+        Footer content  
+      </template>
+    </card>
   </div>
 
   
