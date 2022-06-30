@@ -1,14 +1,20 @@
 import { defineStore } from 'pinia'
 
-const useGpio = defineStore('gpio', {
+const useGpioStore = defineStore('gpio', {
   // arrow function recommended for full type inference
   state: () => {
     return {
       // all these properties will have their type inferred automatically
-      pin: "D0",
-      status: false,
+      digitalOutput:[
+        {pin: "D25", status: false},
+        {pin: "D2", status: true},
+      ],
+      digitalInput:[
+        {pin: "D0", status: true},
+        {pin: "D15", status: false},
+      ],
     }
   }
 })
 
-export default useGpio
+export default useGpioStore
