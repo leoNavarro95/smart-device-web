@@ -1,22 +1,30 @@
 <script setup>
 
 defineProps({
-  header: String
+  header: {type: String, default: "Empty header param"}
 })
 
 </script>
 
 
 <template>
-    <div class="object-contain bg-white m-3 p-0 rounded-lg shadow-lg">
-    <h2 class="
+    <div class="bg-white m-3 p-0 rounded-lg shadow-lg">
+    <div class="
+          flex justify-between items-start
         bg-indigo-400 
           rounded-t-lg 
           text-2xl font-bold text-white
           mb-2 px-2 
           ">
-          {{header}}
-    </h2>
+          <div>{{header}}</div>
+
+          <button @click="$emit('addNewItem')" 
+          class="
+              m-0 p-0 
+              rounded-full hover:bg-indigo-300
+              text-md font-normal hover:text-gray-500
+              ">+</button>
+    </div>
 
     <!-- BODY: Default slot -->
     <div class="p-1 md:p-5 text-gray-700 ">

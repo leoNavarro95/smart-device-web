@@ -29,7 +29,9 @@ const useMCUStore = defineStore('mcu', {
    
          let json = JSON.stringify(data)
          main.config.globalProperties.$socket.send(json)
-         
+   },
+   addNewOutput: ( newOutput ) =>{
+    
    }
   }
 })
