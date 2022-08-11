@@ -4,7 +4,7 @@ defineProps({
   type: {
     type: String,
     validator(value) {
-      return ['Input', 'Output', 'PWM'].includes(value) // Must match: "Input", "Output" or "PWM"
+      return ['INPUT', 'OUTPUT', 'PWM'].includes(value) // Must match: "INPUT", "OUTPUT" or "PWM"
     }
   }, 
   pin: String,
@@ -15,26 +15,70 @@ defineProps({
 
 
 <template>
-    <!-- if type is OUTPUT -->
-    <div v-if="type == 'Output'"
-        class="
-            m-1 p-1
-            grid grid-cols-2 justify-center items-center
-            bg-slate-200
-            border rounded-md border-slate-400
-            "
+    <div class="
+              m-1 p-1
+              flex flex-row justify-center items-center
+              bg-slate-200
+              border rounded-md border-slate-400
+              "
     >
-        <div > {{ pin }}</div> 
 
-        <button @click="$emit('changeStatus')"
-            class="bg-slate-600 hover:bg-slate-500 active:bg-slate-300
-                    border border-slate-300 rounded-md
-                    flex justify-center items-center
-                    p-1"
-            :class="status? 'text-green-600':'text-red-600'"
-        > {{ status? 'ON' : 'OFF' }}</button> 
+      <!-- if type is OUTPUT -->
+      <div v-if="type == 'OUTPUT'"
+            class="basis-4/5 md:basis-5/6 flex flex-row justify-center items-center"
+      >
+          <div class="basis-1/2 pl-5"> {{ pin }}</div> 
+  
+          <button @click="$emit('changeStatus')"
+              class=" basis-1/2
+                    bg-slate-600 hover:bg-slate-500 active:bg-slate-300
+                      border border-slate-300 rounded-md
+                      flex justify-center items-center
+                      p-1"
+              :class="status? 'text-green-600 bg-slate-400':'text-red-600'"
+          > {{ status? 'ON' : 'OFF' }}</button> 
+  
+      </div>
+      <!-- /type OUTPUT -->
 
+      <!-- TODO: Add input and PWM render v-if conditional -->
+      <!-- type INPUT -->
+      <div v-if="type == 'INPUT'"
+            class="basis-4/5 md:basis-5/6 flex flex-row justify-center items-center"
+      >
+          <div class="basis-1/2 pl-5"> {{ pin }}</div>
+          <!-- This is an input, so can't be editable -->
+          <div
+              class=" basis-1/2
+                    bg-slate-600
+                      border border-slate-300 rounded-md
+                      flex justify-center items-center
+                      p-1"
+              :class="status? 'text-green-600 bg-slate-400':'text-red-600'"
+          > {{ status? 'ON' : 'OFF' }}</div> 
+  
+      </div>
+
+      <!-- /type INPUT -->
+  
+      <!-- Delete button -->
+      <button
+          @click="$emit('deleteItem', type)"
+          class=" basis-1/5 md:basis-1/6 
+                  flex items-center justify-center 
+                  p-2 rounded-md
+                "
+        >
+          <svg 
+            class="w-5 h-5 text-red-500 hover:text-red-400 active:text-red-300"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            ><path d="M 10 2 L 9 3 L 4 3 L 4 5 L 20 5 L 20 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 22 L 19 22 L 19 7 L 5 7 z M 8 9 L 10 9 L 10 20 L 8 20 L 8 9 z M 14 9 L 16 9 L 16 20 L 14 20 L 14 9 z">
+            </path>
+          </svg>
+        </button>
+      <!-- /Delete button -->
     </div>
-    <!-- /type OUTPUT -->
 
 </template>

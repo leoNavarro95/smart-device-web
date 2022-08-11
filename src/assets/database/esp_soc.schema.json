@@ -1,0 +1,135 @@
+{   
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "https://local.smartdevice/espsoc.schema.json",
+    "title": "Esp SoC",
+    "description": "Hardware data model of Espressive SoC",
+    "type": "object",
+    "required": [ "mac", "ap_ssid", "ap_pass", "sta_ssid", "sta_pass", "connection_mode" ],
+
+    "properties": {
+
+        "mac": {
+        "description": "The unique identifier for a ESP chip",
+        "type": "string",
+        "pattern": "/^([0-9A-F]{2}[:]){5}([0-9A-F]{2})$/i"
+        },
+
+        "ap_ssid": {
+        "description": "The SSID when activated softAP mode",
+        "type": "string",
+        "maxLength": 32,
+        "minLength": 3
+        },
+
+        "ap_pass": {
+        "description": "The password of the softAP",
+        "type": "string",
+        "maxLength": 31,
+        "minLength": 8
+        },
+
+        "sta_ssid": {
+        "description": "The SSID when activated Station mode",
+        "type": "string",
+        "maxLength": 32,
+        "minLength": 3
+        },
+
+        "sta_pass": {
+        "description": "The password of the Station to be connected, should be less than 31 an more than 8 characters",
+        "type": "string",
+        "maxLength": 31,
+        "minLength": 8
+        },
+
+        "connection_mode": {
+        "description": "This is the mode of wifi. Can be STA or AP",
+        "type": "string",
+        "pattern": "/STA|AP/"
+        },
+
+        "ip_config":{
+            "description": "IP address configuration parameters",
+            "type": "object",
+            "required": [ "mode", "ip_address", "subred_mask_address", "gateway_address"],           
+            "properties": {
+                "mode":{
+                    "description": "The IP mode, should be Static or Dynamic",
+                    "type": "string",
+                    "pattern": "/Static|Dynamic/"
+                },
+                "ip_address":{
+                    "description": "The IP Address",
+                    "type": "string",
+                    "pattern": "/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/"
+                },
+                "subred_mask_address":{
+                    "description": "The Subred Mask Address",
+                    "type": "string",
+                    "pattern": "/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/"
+                },
+                "gateway_address":{
+                    "description": "The Gateway Address",
+                    "type": "string",
+                    "pattern": "/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/"
+                }
+            }
+        },
+
+        "used_gpios": {
+            "description": "Selected GPIOs by the user",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id":{
+                        "description": "An id for computer",
+                        "type": "number"
+                    },
+                    "pin_number":{
+                        "description": "The labeled number of the GPIO",
+                        "type": ["number", "string"]
+                    },
+                    "mode":{
+                        "description": "The operation mode of the gpio",
+                        "type": "string",
+                        "pattern": "/OUTPUT|INPUT|PWM|ANALOG_IN/"
+                    },
+                    "label":{
+                        "description": "A label to indicate human readable info",
+                        "type": "string"
+                    },
+                    "value":{
+                        "description": "The value of the GPIO, should be HIGH|LOW|true|false|1023|255",
+                        "type":["boolean","string","number"]
+                    }
+                }
+            }
+          },
+        
+        "gpios":{
+            "description": "All gpios",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id":{
+                        "description": "An id for computer",
+                        "type": "number"
+                    },
+                    "pin_number":{
+                        "description": "The labeled number of the GPIO",
+                        "type": ["number", "string"]
+                    },
+                    "used":{
+                        "description": "Indicate if the GPIO it's already selected by the user",
+                        "type": "boolean"
+                    }
+                }
+            }
+        
+        }
+    }
+    
+}

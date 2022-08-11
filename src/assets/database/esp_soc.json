@@ -1,0 +1,152 @@
+{
+    "mac": "",
+    "ap_ssid": "smart device",
+    "ap_pass": "",
+    "sta_ssid": "Anonymous",
+    "sta_pass": "12345678",
+    "connection_mode": "STA",
+    "ip_config": {
+        "mode": "Dynamic",
+        "ip_address": "",
+        "subred_mask_address": "",
+        "gateway_address": ""
+    },
+    "used_gpios": [
+        {
+            "id": 0,
+            "pin_number": 0,
+            "mode": "INPUT",
+            "label": "Button on board",
+            "value": "LOW"
+        },
+        {
+            "id": 1,
+            "pin_number": 2,
+            "mode": "OUTPUT",
+            "label": "led rojo",
+            "value": "LOW"
+        },
+        {
+            "id": 2,
+            "pin_number": 5,
+            "mode": "OUTPUT",
+            "label": "led verde",
+            "value": "LOW"
+        },
+        {
+            "id": 3,
+            "pin_number": 6,
+            "mode": "INPUT",
+            "label": "switch sensor",
+            "value": "LOW"
+        }
+    ],
+
+    "gpios": [
+        {
+            "id": 0,
+            "pin_number": 0,
+            "used": true
+        },
+        {
+            "id": 1,
+            "pin_number": 1,
+            "used": false
+        },
+        {
+            "id": 2,
+            "pin_number": 2,
+            "used": true
+        },
+        {
+            "id": 3,
+            "pin_number": 3,
+            "used": false
+        },
+        {
+            "id": 4,
+            "pin_number": 4,
+            "used": false
+        },
+        {
+            "id": 5,
+            "pin_number": 5,
+            "used": false
+        },
+        {
+            "id": 6,
+            "pin_number": 6,
+            "used": false
+        },
+        {
+            "id": 7,
+            "pin_number": 7,
+            "used": false
+        },
+        {
+            "id": 8,
+            "pin_number": 8,
+            "used": false
+        },
+        {
+            "id": 9,
+            "pin_number": 9,
+            "used": false
+        },
+        {
+            "id": 10,
+            "pin_number": 10,
+            "used": false
+        },
+        {
+            "id": 11,
+            "pin_number": 11,
+            "used": false
+        },
+        {
+            "id": 12,
+            "pin_number": 12,
+            "used": false
+        },
+        {
+            "id": 13,
+            "pin_number": 13,
+            "used": false
+        },
+        {
+            "id": 14,
+            "pin_number": 14,
+            "used": false
+        },
+        {
+            "id": 15,
+            "pin_number": 15,
+            "used": false
+        },
+        {
+            "id": 16,
+            "pin_number": 16,
+            "used": false
+        },
+        {
+            "id": 17,
+            "pin_number": 17,
+            "used": false
+        },
+        {
+            "id": 18,
+            "pin_number": 18,
+            "used": false
+        },
+        {
+            "id": 19,
+            "pin_number": 19,
+            "used": false
+        },
+        {
+            "id": 20,
+            "pin_number": 20,
+            "used": false
+        }
+    ]
+}

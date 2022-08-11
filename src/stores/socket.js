@@ -48,6 +48,7 @@ export const useSocketStore = defineStore({
     // Receive the message sent by the server
     SOCKET_ONMESSAGE(message) {
       this.message = message
+      console.log( "[ws] received: ", message);
     },
     // Auto reconnect
     SOCKET_RECONNECT(count) {
