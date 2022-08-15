@@ -19,18 +19,6 @@ const MCUStore = defineStore('mcu', {
     ip_config:       espSoc.ip_config,
     used_gpios:      espSoc.used_gpios,
     gpios:           espSoc.gpios,
-
-
-    
-    
-    digitalOutput:[
-      {pin: "D25", status: false},
-      {pin: "D2", status: true},
-    ],
-    digitalInput:[
-      {pin: "D0", status: true},
-      {pin: "D15", status: false},
-    ],
    
   }),
   
@@ -40,9 +28,9 @@ const MCUStore = defineStore('mcu', {
       if(gpio.mode !== 'OUTPUT') return
 
       gpio.value === 'HIGH' ? gpio.value = 'LOW' : gpio.value = 'HIGH'
-      console.log(gpio.pin_number + ': ' + gpio.value);
+      console.log(gpio.pin_number + ': ' + gpio.value)
       
-      this.used_gpios[gpio.id].value.value = gpio.value // updated the store
+      this.used_gpios[gpio.id].value = gpio.value // updated the store
 
    /* FIXME ojo para enviar datos por websocket
       let data = {
@@ -58,7 +46,7 @@ const MCUStore = defineStore('mcu', {
 
    addNewOutput( newOutputPin ) {
     // TODO: Send to MCU backend new updated state with new output pin
-    this.digitalOutput.push({pin: newOutputPin, status: false})
+    // this.digitalOutput.push({pin: newOutputPin, status: false})
    },
 
    addNewGPIO(){

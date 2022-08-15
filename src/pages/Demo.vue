@@ -22,7 +22,6 @@ const modalData = ref({type:"", title: "", dropDownTitle: ""})
 const selectedOpt = ref("")
 
 const mcu = MCUStore()
-const {digitalOutput, digitalInput} = storeToRefs(mcu)
 
 
 const openModal = ( newModalData ) =>{
@@ -82,10 +81,8 @@ const sendGPIO = () => {
 <template>
   <!-- MODAL for add new Items -->
   <Modal 
-      @add="addNewPin()"
-      @close="isOpen=false"
-      :is-open="isOpen" 
-      :title="modalData.title"
+      @add="addNewPin()" @close="isOpen=false"
+      :is-open="isOpen" :title="modalData.title"
       >
       <div class="flex justify-start items-center">
         <DropDownMenu :title="modalData.dropDownTitle" @changed-opt="(opt) => selectedOpt = opt" :items="['D1','D2', 'D3']"></DropDownMenu>
