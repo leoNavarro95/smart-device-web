@@ -50,7 +50,7 @@
       <!-- Dropdown menu -->
       <div
         v-show="show"
-        class="absolute right-0 py-2 mt-2 bg-indigo-500 rounded-md shadow-xl  w-44"
+        class="absolute right-0 py-2 mt-2 bg-indigo-500 rounded-md shadow-xl w-44 h-44 overflow-hidden hover:overflow-auto scrollbar"
       >
         <div @click="onSelected(item)" 
             v-for="(item, index) in items" :key="index" 
@@ -61,3 +61,29 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.scrollbar::-webkit-scrollbar {
+    /* width: 15px;
+    height: 25px; */
+    @apply h-max w-4
+  }
+
+.scrollbar::-webkit-scrollbar-track {
+    /* border-radius: 60vh;
+    background: #f7f4ed; */
+    @apply bg-indigo-200 rounded border-2 border-indigo-900
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    /* background: #e0cbcb;
+    border-radius: 60vh;
+    border: 3px solid #f6f7ed; */
+    @apply bg-indigo-400 rounded border-2 border-indigo-900 m-1
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+    /* background: #c0a0b9; */
+    @apply bg-indigo-300
+}
+</style>
