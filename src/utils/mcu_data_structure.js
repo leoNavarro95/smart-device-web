@@ -31,3 +31,20 @@ export const groupBy = (objectArray, property) => {
         return acc
     }, {})
 }
+
+/**
+ * 
+ * @param { Array } gpios All gpios in the mcu
+ * @returns Array with not used (availables) gpios
+ */
+export const getNotUsedGpios = ( gpios ) => {
+    let availableGpios = []
+    
+    gpios.forEach(gpio => {
+        if( gpio.used ) return //if gpio is used don't add to array
+
+        availableGpios.push(gpio)
+    })
+
+    return availableGpios
+}

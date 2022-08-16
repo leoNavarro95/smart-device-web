@@ -46,6 +46,7 @@
         {
             "id": 0,
             "pin_number": 0,
+            "modes": ["INPUT", "OUTPUT", "PWM", "ANALOG", "I2C"],
             "used": true
         },
         {
@@ -71,12 +72,12 @@
         {
             "id": 5,
             "pin_number": 5,
-            "used": false
+            "used": true
         },
         {
             "id": 6,
             "pin_number": 6,
-            "used": false
+            "used": true
         },
         {
             "id": 7,

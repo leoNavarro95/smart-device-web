@@ -8,16 +8,20 @@
 
     const emit = defineEmits(['changedOpt'])
 
-    // const { selectedOpt } = toRefs(props)
+    let stringOpt = ref("")
     let selectedOpt = ref(String)
-
     let show = ref(false)
-    const toggleMenu = () => (show.value = !show.value)
+
+    const toggleMenu = () => {
+      stringOpt.value = "GPIO"
+      show.value = !show.value
+    }
 
     const onSelected = (opt) => {
-        selectedOpt.value = opt
-        emit('changedOpt', opt) //it is emitted new selected option, then the parent can get it 
-        toggleMenu()
+      
+      selectedOpt.value = opt
+      emit('changedOpt', opt) //it is emitted new selected option, then the parent can get it 
+      toggleMenu()
     }
 
     selectedOpt.value = props.title //just inicializate slectOpt with title value
@@ -32,7 +36,7 @@
         @click="toggleMenu"
         class="flex items-center p-2 text-indigo-100 bg-indigo-600 rounded-md"
       >
-        <span class="mr-4">{{selectedOpt}}</span>
+        <span class="mr-4">{{stringOpt}}{{selectedOpt}}</span>
         <svg
           class="w-5 h-5 text-indigo-100 dark:text-white"
           xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +59,7 @@
         <div @click="onSelected(item)" 
             v-for="(item, index) in items" :key="index" 
             class="block px-4 py-2 text-sm text-indigo-100  hover:bg-indigo-400 hover:text-indigo-100">
-            {{item}}
+            {{stringOpt}}{{item}}
         </div>
       </div>
     </div>
