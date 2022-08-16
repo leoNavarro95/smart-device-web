@@ -54,7 +54,19 @@ const MCUStore = defineStore('mcu', {
       })
       // TODO: Send to MCU backend new updated state
 
+   },
+
+   removeGPIO( gpio ){
+    this.gpios[Number(gpio.pin_number)] = {...this.gpios[Number(gpio.pin_number)], used: false} //update the state 
+
+    const removed = this.used_gpios.splice( gpio.id, 1 )
+    
+    if(gpio.id < this.used_gpios.length)  //need to update ids to be equal to array index
+      for( let index = gpio.id; index < this.used_gpios.length; index++){
+        this.used_gpios[index].id--
+      }
    }
+
   }
 })
 

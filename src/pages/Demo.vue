@@ -29,18 +29,15 @@ const availablesGpios =  ref(Array)
 const refreshGpios = () => {
   usedGpiosByMode.value =  groupBy( mcu.used_gpios, 'mode' )
   availablesGpios.value =  getNotUsedGpios(mcu.gpios)
-
-  console.log(mcu.gpios);
 }
 
 refreshGpios()
 
-// TODO filter by modes for each gpio (i.e not all can be analog, or PWM, or Capacitive...)
 
+// TODO when open Modal filter by modes for each gpio (i.e not all can be analog, or PWM, or Capacitive...)
 const openModal = ( newModalData ) =>{
   selectedGpioNumber.value = "" 
   modalData.value = {...newModalData}
-
   isOpen.value = true
 }
 
@@ -50,15 +47,9 @@ const addNewGpio = () => {
   isOpen.value = false
 }
 
-const deleteItem = (type) =>{
-    switch (type) {
-      case 'Output':
-        
-        break;
-    
-      default:
-        break;
-    }
+const removeGpio = ( gpio ) => {
+  mcu.removeGPIO(gpio)
+  refreshGpios()
 }
 
 
@@ -103,7 +94,7 @@ const sendGPIO = () => {
       <div v-for="output in usedGpiosByMode['OUTPUT']" >
         <digital-status 
             @change-status="mcu.changePinStatus(output)"
-            @delete-item="deleteItem" 
+            @delete-item="removeGpio( output )" 
             type="OUTPUT" 
             :pin="output.pin_number.toString()" 
             :status="output.value === 'HIGH' ? true : false"
@@ -115,7 +106,7 @@ const sendGPIO = () => {
     <card header="Inputs" @add-new-item="openModal({type: 'INPUT', title:'Add new input', dropDownTitle: 'Select new input pin'})">
     <div v-for="input in usedGpiosByMode['INPUT']" >
       <digital-status 
-            @delete-item="deleteItem" 
+            @delete-item="removeGpio( input )" 
             type="INPUT" 
             :pin="input.pin_number.toString()" 
             :status="input.value === 'HIGH' ? true : false"
