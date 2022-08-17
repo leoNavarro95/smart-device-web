@@ -1,30 +1,30 @@
 <script setup>
-    import { ref } from 'vue'
+import { ref } from 'vue'
 
-    const props = defineProps({
-        items: { type: Array, required: true},
-        title: { type: String, required: true},
-    })
+const props = defineProps({
+  items: { type: Array, required: true },
+  title: { type: String, required: true },
+})
 
-    const emit = defineEmits(['changedOpt'])
+const emit = defineEmits(['changedOpt'])
 
-    let stringOpt = ref("")
-    let selectedOpt = ref(String)
-    let show = ref(false)
+let stringOpt = ref("")
+let selectedOpt = ref(String)
+let show = ref(false)
 
-    const toggleMenu = () => {
-      stringOpt.value = "GPIO"
-      show.value = !show.value
-    }
+const toggleMenu = () => {
+  stringOpt.value = "GPIO"
+  show.value = !show.value
+}
 
-    const onSelected = (opt) => {
-      
-      selectedOpt.value = opt
-      emit('changedOpt', opt) //it is emitted new selected option, then the parent can get it 
-      toggleMenu()
-    }
+const onSelected = (opt) => {
 
-    selectedOpt.value = props.title //just inicializate slectOpt with title value
+  selectedOpt.value = opt
+  emit('changedOpt', opt) //it is emitted new selected option, then the parent can get it 
+  toggleMenu()
+}
+
+selectedOpt.value = props.title //just inicializate slectOpt with title value
 
 </script>
 

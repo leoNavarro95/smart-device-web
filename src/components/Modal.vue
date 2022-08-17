@@ -1,6 +1,7 @@
 <script setup>
     defineProps({
     isOpen: {type: Boolean, required: true},
+    disabled: {type: Boolean, required: true},
     title: {type: String, default: "Title of modal"},
     })
 </script>
@@ -31,7 +32,10 @@
             >
               Cancel
             </button>
-            <button @click="$emit('add')" class="px-6 py-2 ml-2 text-blue-100 bg-blue-600 rounded active:bg-blue-300">
+            <button @click="$emit('add')"
+              :disabled="disabled"
+              class="px-6 py-2 ml-2 text-blue-100 bg-blue-600 rounded active:bg-blue-300 disabled:bg-zinc-500"
+              >
               Add
             </button>
           </div>

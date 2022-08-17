@@ -27,8 +27,8 @@ const MCUStore = defineStore('mcu', {
     changePinStatus( gpio ) {
       if(gpio.mode !== 'OUTPUT') return
 
-      gpio.value === 'HIGH' ? gpio.value = 'LOW' : gpio.value = 'HIGH'
-      this.used_gpios[gpio.id - 1].value = gpio.value // updated the store
+      gpio.value === 'HIGH' ? gpio.value = 'LOW' : gpio.value = 'HIGH' // toggle the HIGH/LOW state
+      this.used_gpios[gpio.id].value = gpio.value // updated the store
 
    /* FIXME ojo para enviar datos por websocket
       let data = {
@@ -42,16 +42,10 @@ const MCUStore = defineStore('mcu', {
    */
    },
     
-    addNewGPIO( pin_number, mode ){
-      this.gpios[Number(pin_number)] = {...this.gpios[Number(pin_number)], used: true} //update to used the state
+    addNewGPIO( newGpio ){
+      this.gpios[Number(newGpio.pin_number)] = {...this.gpios[Number(newGpio.pin_number)], used: true} //update to used the state
       const id = this.used_gpios.length
-      this.used_gpios.push({
-        id, 
-        pin_number: Number(pin_number),
-        mode,
-        label: "", //TODO: Add label field in Modal
-        value: "" // NOT allways it is going to be digital, i.e can be a sensor with numeric value
-      })
+      this.used_gpios.push({ ...newGpio, id })
       // TODO: Send to MCU backend new updated state
 
    },

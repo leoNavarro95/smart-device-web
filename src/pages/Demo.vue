@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import { getCurrentInstance } from "vue"
 
 import Card from '../components/Card.vue'
 import DigitalStatus from '../components/DigitalStatus.vue'
 import Modal from '../components/Modal.vue'
+import MyInput from '../components/Input.vue';
 import DropDownMenu from '../components/DropDownMenu.vue'
 
 import MCUStore from '../stores/mcu.js'
@@ -41,8 +41,21 @@ const openModal = ( newModalData ) =>{
   isOpen.value = true
 }
 
+const gpioLabel = ref("")
+
+const editedLabel = (label) => {
+  gpioLabel.value = label
+}
+
 const addNewGpio = () => {
-  mcu.addNewGPIO(selectedGpioNumber.value, modalData.value.type)
+  const newGpio = { 
+    pin_number: selectedGpioNumber.value,
+    mode: modalData.value.type,
+    label: gpioLabel.value,
+    value: "" 
+  }
+
+  mcu.addNewGPIO(newGpio)
   refreshGpios()
   isOpen.value = false
 }
@@ -75,8 +88,15 @@ const sendGPIO = () => {
       @add="addNewGpio()" 
       @close="isOpen=false"
       :is-open="isOpen" :title="modalData.title"
+      :disabled="(selectedGpioNumber.length == 0 | gpioLabel.length == 0) ? true : false"
       >
-      <div class="flex justify-start items-center">
+      <div class="grid grid-cols-1 justify-center items-start">
+        <MyInput 
+          @edited="(label) => editedLabel(label)"
+          label="GPIO Label" 
+          placeholder="GPIO is connected to..." 
+          :maxlength="16" 
+        />
         <DropDownMenu 
           @changed-opt="(opt) => selectedGpioNumber = opt"
           :title="modalData.dropDownTitle" 
