@@ -1,18 +1,18 @@
 <script setup>
 
 defineProps({
-  header: {type: String, default: "Empty header param"}
+  header: {type: String, default: "Empty header"}
 })
 
 </script>
 
 
 <template>
-    <div class="bg-white m-3 p-0 rounded-lg shadow-lg">
+    <div class="bg-white m-3 p-0 border border-indigo-400 rounded-lg">
     <div class="
           flex justify-between items-start
         bg-indigo-400 
-          rounded-t-lg 
+          rounded-t-md 
           text-2xl font-bold text-white
           mb-2 px-2 
           ">
