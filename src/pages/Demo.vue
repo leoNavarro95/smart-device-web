@@ -100,7 +100,7 @@ const sendGPIO = () => {
         <DropDownMenu 
           @changed-opt="(opt) => selectedGpioNumber = opt"
           :title="modalData.dropDownTitle" 
-          :items="availablesGpios.map((gpio) => gpio.pin_number.toString())"
+          :items="availablesGpios.map((gpio) => gpio.pin_number)"
         >
         </DropDownMenu>
       </div>
@@ -108,7 +108,7 @@ const sendGPIO = () => {
 
   <h1>{{ msg }}</h1>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 justify-center items-start">
+  <div class="grid grid-cols-1 md:grid-cols-2 justify-center items-start">
     
     <card header="Outputs" @add-new-item="openModal({type: 'OUTPUT', title:'Add new output', dropDownTitle: 'Select new output pin'})">
       <div v-for="output in usedGpiosByMode['OUTPUT']" >
@@ -116,7 +116,8 @@ const sendGPIO = () => {
             @change-status="mcu.changePinStatus(output)"
             @delete-item="removeGpio( output )" 
             type="OUTPUT" 
-            :pin="output.pin_number.toString()" 
+            :gpio="output.pin_number"
+            :label="output.label" 
             :status="output.value === 'HIGH' ? true : false"
         >
         </digital-status>
@@ -128,7 +129,8 @@ const sendGPIO = () => {
       <digital-status 
             @delete-item="removeGpio( input )" 
             type="INPUT" 
-            :pin="input.pin_number.toString()" 
+            :gpio="input.pin_number"
+            :label="input.label" 
             :status="input.value === 'HIGH' ? true : false"
         >
       </digital-status>

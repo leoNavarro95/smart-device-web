@@ -7,7 +7,8 @@ defineProps({
       return ['INPUT', 'OUTPUT', 'PWM'].includes(value) // Must match: "INPUT", "OUTPUT" or "PWM"
     }
   }, 
-  pin: String,
+  label: String,
+  gpio: Number,
   status: Boolean
 })
 
@@ -22,44 +23,40 @@ defineProps({
               border rounded-md border-slate-400
               "
     >
+      <div class="basis-2/3 pl-3 flex flex-row space-x-1 justify-start items-center">
+        <p class="md:text-lg text-yellow-500 bg-blue-200 border rounded-md py-0 px-2"
+        > {{ gpio }}</p> 
+      <p class="md:text-lg text-gray-600"
+      > {{ label }}</p> 
+      </div>
 
-      <!-- if type is OUTPUT -->
-      <div v-if="type == 'OUTPUT'"
-            class="basis-4/5 md:basis-5/6 flex flex-row justify-center items-center"
+      <div class="basis-2/5 md:basis-2/6 flex flex-row justify-end items-center"
       >
-          <div class="basis-1/2 pl-5"> {{ pin }}</div> 
-  
+
+        <div v-if="type == 'OUTPUT'">
           <button @click="$emit('changeStatus')"
-              class=" basis-1/2
-                    bg-slate-600 hover:bg-slate-500 active:bg-slate-300
+              class="bg-slate-600 hover:bg-slate-500 active:bg-slate-300
                       border border-slate-300 rounded-md
-                      flex justify-center items-center
-                      p-1"
+                      py-1 px-3"
               :class="status? 'text-green-600 bg-slate-400':'text-red-600'"
-          > {{ status? 'ON' : 'OFF' }}</button> 
-  
-      </div>
-      <!-- /type OUTPUT -->
+            > {{ status? 'ON' : 'OFF' }}
+          
+          </button> 
+        </div>
 
-      <!-- TODO: Add input and PWM render v-if conditional -->
-      <!-- type INPUT -->
-      <div v-if="type == 'INPUT'"
-            class="basis-4/5 md:basis-5/6 flex flex-row justify-center items-center"
-      >
-          <div class="basis-1/2 pl-5"> {{ pin }}</div>
-          <!-- This is an input, so can't be editable -->
-          <div
-              class=" basis-1/2
-                    bg-slate-600
-                      border border-slate-300 rounded-md
-                      flex justify-center items-center
-                      p-1"
-              :class="status? 'text-green-600 bg-slate-400':'text-red-600'"
-          > {{ status? 'ON' : 'OFF' }}</div> 
-  
+        <div v-if="type == 'INPUT'">
+            <!-- This is an input, so can't be editable -->
+            <div
+                class="bg-slate-600
+                        border border-slate-300 rounded-md
+                        py-1 px-3"
+                :class="status? 'text-green-600 bg-slate-400':'text-red-600'"
+            > {{ status? 'ON' : 'OFF' }}</div> 
+        </div>
+        
       </div>
 
-      <!-- /type INPUT -->
+      
   
       <!-- Delete button -->
       <button
