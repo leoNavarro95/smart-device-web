@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory  } from 'vue-router'
 
-import Demo from '../pages/Demo.vue'
+import GpioControl from '../pages/GpioControl.vue'
 import MainPage from '../pages/MainPage.vue'
 
 const router = createRouter({
@@ -12,9 +12,9 @@ const router = createRouter({
             component: MainPage
         },
         {
-            path:'/demo', 
-            name: 'demo',
-            component: Demo
+            path:'/gpio-control', 
+            name: 'GpioControl',
+            component: GpioControl
         },
     ]
 })

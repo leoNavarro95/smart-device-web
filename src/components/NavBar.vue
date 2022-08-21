@@ -65,8 +65,8 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
         "
       >
         
-        <router-link to="/demo" class="text-gray-100 hover:text-indigo-400">Demo</router-link>
         <router-link to="/" class="text-gray-100 hover:text-indigo-400">Home</router-link>
+        <router-link to="/gpio-control" class="text-gray-100 hover:text-indigo-400">Gpio Control</router-link>
         <router-link to="/" class="text-gray-100 hover:text-indigo-400">About</router-link>
         <router-link to="/" class="text-gray-100 hover:text-indigo-400">Contact Us</router-link>
         
