@@ -1,10 +1,12 @@
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 let showMenu = ref(false)
 const toggleNav = () => (showMenu.value = !showMenu.value)
 
+const currentRoute = computed(() => { return useRoute().name})
 </script>
 
 <template>
@@ -64,12 +66,30 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
           md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0
         "
       >
-        
-        <router-link to="/" class="text-gray-100 hover:text-indigo-400">Home</router-link>
-        <router-link to="/gpio-control" class="text-gray-100 hover:text-indigo-400">Gpio Control</router-link>
-        <router-link to="/Settings" class="text-gray-100 hover:text-indigo-400">Settings</router-link>
-        <router-link to="/" class="text-gray-100 hover:text-indigo-400">About</router-link>
-        <router-link to="/" class="text-gray-100 hover:text-indigo-400">Contact Us</router-link>
+        <router-link 
+          @click="toggleNav" to="/" class="text-gray-100 hover:text-indigo-400" :class="{'underline':currentRoute == 'Home'}">
+            Home
+        </router-link>
+
+        <router-link 
+          @click="toggleNav" to="/gpio-control" class="text-gray-100 hover:text-indigo-400" :class="{'underline':currentRoute == 'GpioControl'}">
+            Gpio Control
+        </router-link>
+
+        <router-link 
+          @click="toggleNav" to="/Settings" class="text-gray-100 hover:text-indigo-400" :class="{'underline':currentRoute == 'Settings'}">
+            Settings
+        </router-link>
+
+        <router-link 
+          @click="toggleNav" to="/" class="text-gray-100 hover:text-indigo-400" :class="{'underline':currentRoute == 'About'}">
+            About
+        </router-link>
+
+        <router-link 
+          @click="toggleNav" to="/" class="text-gray-100 hover:text-indigo-400" :class="{'underline':currentRoute == 'ContactUs'}">
+            Contact Us
+        </router-link>
         
       </ul>
     </nav>
