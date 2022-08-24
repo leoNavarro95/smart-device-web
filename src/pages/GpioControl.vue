@@ -93,6 +93,7 @@ const sendGPIO = () => {
       <div class="grid grid-cols-1 justify-center items-start">
         <MyInput 
           @edited="(label) => editedLabel(label)"
+          id="gpio label"
           label="GPIO Label" 
           placeholder="GPIO is connected to..." 
           :maxlength="16" 

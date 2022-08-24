@@ -54,7 +54,7 @@ selectedOpt.value = props.title //just inicializate slectOpt with title value
       <!-- Dropdown menu -->
       <div
         v-show="show"
-        class="absolute right-0 py-2 mt-2 bg-indigo-500 rounded-md shadow-xl w-44 h-44 overflow-hidden hover:overflow-auto scrollbar"
+        class="absolute right-0 py-2 mt-2 bg-indigo-500 rounded-md shadow-xl w-44 h-44 overflow-hidden hover:overflow-auto touch-pan-y scrollbar"
       >
         <div @click="onSelected(item)" 
             v-for="(item, index) in items" :key="index" 
