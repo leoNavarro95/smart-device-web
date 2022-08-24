@@ -29,7 +29,7 @@ const onSelected = (option) => {
       <li v-for="(option, index) in props.options" :key="index" class="relative">
         <input @click="onSelected(option)" class="sr-only peer" type="radio" :value="option" :name="props.name" :id="props.name + 'choice' + index.toString()">
         <label
-          class="p-0.5 
+          class="p-0.5 transition duration-500 ease-in-out
             bg-white border border-gray-300 rounded-lg 
             cursor-pointer focus:outline-none 
             hover:bg-gray-50 peer-checked:ring-indigo-300 peer-checked:ring-2 peer-checked:border-transparent peer-checked:bg-indigo-50
