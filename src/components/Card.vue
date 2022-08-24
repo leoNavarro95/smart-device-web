@@ -13,7 +13,7 @@ defineProps({
           flex justify-between items-start
         bg-indigo-400 
           rounded-t-md 
-          text-2xl font-bold text-white
+          text-xl font-semibold font-mono text-white
           mb-2 px-2 
           ">
           <div>{{header}}</div>
